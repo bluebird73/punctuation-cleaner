@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full-Width to Half-Width Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+      background-color: #f4f4f9;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 1em;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    h2 {
+      color: #333;
+    }
+    .output {
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h2>全角符号 & 智能引号转换为英文半角</h2>
+  <textarea id="inputText" placeholder="粘贴你的文本内容..."></textarea>
+  <button onclick="convertText()">转换</button>
+
+  <div class="output">
+    <h3>转换结果：</h3>
+    <textarea id="outputText" readonly></textarea>
+  </div>
+
+  <script>
+    function convertText() {
+      const input = document.getElementById('inputText').value;
+      const replacements = {
+        '‘': "'", '’': "'",
+        '“': '"', '”': '"',
+        '，': ',', '。': '.',
+        '：': ':', '；': ';',
+        '！': '!', '？': '?',
+        '（': '(', '）': ')',
+        '【': '[', '】': ']',
+        '《': '<', '》': '>',
+        '、': ',', '　': ' ',
+        '—': '-', '…': '...',
+        '＂': '"', '＇': '\'',
+        '＂': '"', '｀': '`'
+      };
+      let output = input.replace(/[‘’“”，。：；！？（）【】《》、　—…＂＇｀]/g, m => replacements[m] || m);
+      document.getElementById('outputText').value = output;
+    }
+  </script>
+</body>
+</html>
